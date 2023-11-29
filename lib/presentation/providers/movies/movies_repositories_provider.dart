@@ -4,6 +4,6 @@ import 'package:cinemapedia/infrastructure/datasoruces/moviedb_datasource.dart';
 import 'package:cinemapedia/infrastructure/repositories/movie_repository_impl.dart';
 
 //este respositorio es inmutable
-final movieRepositoryProvider = Provider((ref) {
+final moviesRepositoryProvider = Provider((ref) {
   return MovieRepositoryImpl( MoviedbDatasource() );
 });
