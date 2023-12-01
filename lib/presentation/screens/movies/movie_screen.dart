@@ -1,5 +1,5 @@
 import 'package:cinemapedia/domain/entities/movies.dart';
-import 'package:cinemapedia/presentation/providers/movies/movie_info_provider.dart';
+import 'package:cinemapedia/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,11 +23,13 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
     super.initState();
 
     ref.read(movieInfoProvider.notifier).loadMovie(widget.movieId);
+    ref.read(actorsByMovieProvider.notifier).loadActros(widget.movieId);
   }
 
   @override
   Widget build(BuildContext context) {
     final Movie? movie = ref.watch(movieInfoProvider)[widget.movieId];
+
 
     if(movie == null ) {
       return const Scaffold(
@@ -168,7 +170,7 @@ class _MovieStackShadows extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.7, 1.0],
+                stops: [0.8, 1.0],
                 colors: [
                   Colors.transparent,
                   Colors.black87,
@@ -183,7 +185,7 @@ class _MovieStackShadows extends StatelessWidget {
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                stops: [0.0, 0.1],
+                stops: [0.0, 0.2],
                 colors: [
                   Colors.black87,
                   Colors.transparent,
