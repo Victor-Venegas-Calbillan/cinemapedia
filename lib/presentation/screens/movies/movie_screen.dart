@@ -39,9 +39,79 @@ class MovieScreenState extends ConsumerState<MovieScreen> {
       body: CustomScrollView(
         physics: const ClampingScrollPhysics(),
         slivers: [
-          _CustomSliverAppBar(movie: movie)
+          _CustomSliverAppBar(movie: movie),
+          SliverList(delegate: SliverChildBuilderDelegate(
+            (context, index) => _MovieDetails(movie: movie),
+            childCount: 1
+          )),
         ],
       ),
+    );
+  }
+}
+
+class _MovieDetails extends StatelessWidget {
+  final Movie movie;
+
+  const _MovieDetails({
+    required this.movie
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final textStyle = Theme.of(context).textTheme;
+
+    return Column(
+     crossAxisAlignment: CrossAxisAlignment.start,
+     children: [
+      //Imagen
+      Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.network(
+                movie.posterPath,
+                width: size.width * 0.3,
+              ),
+            ),
+            const SizedBox(width: 10),
+
+            //descripcion
+            SizedBox(
+              width: (size.width - 40) * 0.6,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(movie.title, style: textStyle.titleLarge),
+                  Text(movie.overview),
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
+      //Generos de la pelicula
+      Padding(
+         padding: const EdgeInsets.all(8),
+         child: Wrap(
+          children: [
+            ...movie.genreIds.map((genero) => Container(
+              margin: const EdgeInsets.only( right:  10),
+              child: Chip(
+                label: Text(genero),
+                shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(20)),
+              ),
+            )).toList()
+          ],
+         ),
+      ),
+      //todo: mostrar actores list view
+      SizedBox(height: 100 )
+     ], 
     );
   }
 }
@@ -68,15 +138,15 @@ class _CustomSliverAppBar extends StatelessWidget {
           style: const TextStyle( fontSize: 20 ),
           textAlign: TextAlign.start,
         ),
-        background: _MovieStackInfo(movie: movie),
+        background: _MovieStackShadows(movie: movie),
 
       ),
     );
   }
 }
 
-class _MovieStackInfo extends StatelessWidget {
-  const _MovieStackInfo({
+class _MovieStackShadows extends StatelessWidget {
+  const _MovieStackShadows({
     required this.movie,
   });
 
@@ -126,3 +196,4 @@ class _MovieStackInfo extends StatelessWidget {
     );
   }
 }
+
