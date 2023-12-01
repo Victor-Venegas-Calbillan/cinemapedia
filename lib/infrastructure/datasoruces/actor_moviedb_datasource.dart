@@ -5,7 +5,7 @@ import 'package:cinemapedia/config/constants/enviroment.dart';
 import 'package:cinemapedia/domain/datasources/actors_datasource.dart';
 import 'package:cinemapedia/domain/entities/actors.dart';
 
-class ActorMovieDBDatasource extends ActorsDataSource{
+class ActorMovieDBDatasource extends ActorsDataSource {
 
   final dio = Dio(BaseOptions(
     baseUrl: 'https://api.themoviedb.org/3',
