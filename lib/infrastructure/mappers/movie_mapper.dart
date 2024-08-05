@@ -17,7 +17,9 @@ class MovieMapper {
     posterPath: moviedb.posterPath != '' 
     ? 'https://image.tmdb.org/t/p/w500${moviedb.posterPath}'
     : 'https://ih1.redbubble.net/image.4444864572.3099/fposter,small,wall_texture,square_product,600x600.jpg', 
-    releaseDate: moviedb.releaseDate, 
+    releaseDate: moviedb.releaseDate != null
+    ? moviedb.releaseDate! 
+    : DateTime.now(), 
     title: moviedb.title, 
     video: moviedb.video, 
     voteAverage: moviedb.voteAverage, 

@@ -127,7 +127,7 @@ class _Silde extends StatelessWidget {
                 Icon(Icons.star_half_outlined, color: Colors.yellow.shade800),
                 const SizedBox(width: 3),
                 Text(
-                  '${movie.voteAverage}',
+                  HumanFormat.number(movie.voteAverage, 1),
                   style: textStyles.bodyMedium?.copyWith(color: Colors.yellow.shade800),
                 ),
                 const Spacer(),
